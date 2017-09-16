@@ -1,0 +1,36 @@
+service: user-service
+
+provider:
+  name: aws
+  runtime: java8
+  memorySize: 1536
+  timeout: 60
+
+package:
+  artifact: build/distributions/user-service.zip
+
+functions:
+  users:
+    handler: com.serverless.VertxHandler
+    events:
+      - http:
+          path: users
+          method: get
+          cors: true
+      - http:
+          path: users/{id}
+          method: get
+          cors: true
+      - http:
+          path: users
+          method: post
+          cors: true
+      - http:
+          path: users/{id}
+          method: put
+          cors: true
+      - http:
+          path: users/{id}
+          method: delete
+          cors: true
+          
